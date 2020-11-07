@@ -8,7 +8,11 @@ export async function addAccount(_email:string, _password:string) {
   if(!existUser){
   const account = new User({email:_email, password:_password, avatar:DEFULT_AVATAR});
   await account.hashPassword()
+  try{
   await account.save()
+  }catch(e){
+    console.log(e)
+  }
   return account;
   }
   else{
